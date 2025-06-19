@@ -38,7 +38,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="mb-8"
+                className=""
             >
                 <Image
                     src="/images/logoIcon.png"
@@ -57,7 +57,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
                 transition={{ delay: 0.3, duration: 0.6 }}
                 className="text-center mb-8"
             >
-                <span className="text-3xl text-[#1bc2ff] font-display font-black outlined-text tracking-wider">GLOW HAUS</span>
+                <span className="text-6xl text-[#1bc2ff] font-display font-black outlined-text tracking-wider">GLOW HAUS</span>
 
                 <p className="text-gray-600 text-lg font-medium">
                     Premium Cleaning Services
