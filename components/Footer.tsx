@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Star } from 'lucide-react'
+import { Phone, Mail, MapPin, Instagram, Star, } from 'lucide-react'
 
 const Footer = () => {
   const quickLinks = [
@@ -22,10 +22,7 @@ const Footer = () => {
   ]
 
   const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' }
+    { icon: Instagram, href: 'https://www.instagram.com/glowhauscleaning_/', label: 'Instagram' },
   ]
 
   const contactInfo = [
@@ -167,6 +164,8 @@ const Footer = () => {
                     <motion.a
                       key={social.label}
                       href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.1, duration: 0.5 }}
