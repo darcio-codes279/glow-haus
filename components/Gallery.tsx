@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import CuratorFeed from './CuratorIGFeed'
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null)
@@ -81,7 +82,9 @@ const Gallery = () => {
         </motion.div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <CuratorFeed />
+
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {galleryImages.map((image, index) => (
             <motion.div
               key={index}
@@ -101,7 +104,7 @@ const Gallery = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                {/* Overlay Content */}
+                {/* Overlay Content 
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                   <div className="bg-primary-500/20 backdrop-blur-sm rounded-lg p-3">
                     <h3 className="font-semibold mb-1">{image.title}</h3>
@@ -111,7 +114,9 @@ const Gallery = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </div> */}
+
+
 
         {/* Modal */}
         {selectedImage !== null && (

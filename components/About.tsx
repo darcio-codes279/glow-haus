@@ -1,27 +1,26 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Shield, Heart, Sparkles, Award } from 'lucide-react'
 
 const About = () => {
   const features = [
     {
-      icon: Shield,
+      emoji: '🛡️',
       title: 'Trusted & Insured',
       description: 'Fully licensed and insured for your peace of mind'
     },
     {
-      icon: Heart,
+      emoji: '💚',
       title: 'Eco-Friendly',
       description: 'Safe, non-toxic cleaning products for your family'
     },
     {
-      icon: Sparkles,
+      emoji: '✨',
       title: 'Attention to Detail',
       description: 'Every corner cleaned to perfection'
     },
     {
-      icon: Award,
+      emoji: '🏆',
       title: 'Quality Guaranteed',
       description: '100% satisfaction guarantee on all services'
     }
@@ -98,7 +97,7 @@ const About = () => {
                   className="flex items-start space-x-3"
                 >
                   <div className="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <feature.icon className="w-5 h-5 text-primary-600" />
+                    <span className="text-xl">{feature.emoji}</span>
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">{feature.title}</h3>

@@ -40,7 +40,7 @@ const Header = () => {
           >
             <div className="h-full flex items-center justify-center">
               <Image
-                src="/images/GLOW-HAUS-LOGO.png"
+                src="/images/logoicon.png"
                 alt="Glow Haus Logo"
                 width={0}
                 height={0}
@@ -48,7 +48,7 @@ const Header = () => {
                 className="h-full w-auto object-contain max-h-20 md:max-h-24 lg:max-h-28"
               />
             </div>
-            <span className="text-2xl font-bold text-[#50ade6]">GLOW HAUS</span>
+            <span className="text-3xl text-[#1bc2ff] font-display font-black outlined-text tracking-wider">GLOW HAUS</span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -63,13 +63,14 @@ const Header = () => {
                 {item.name}
               </motion.a>
             ))}
-            <motion.button
+            <motion.a
+              href="mailto:Glowhauscleaning@gmail.com?subject=Quote Request"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect"
+              className="inline-block bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect"
             >
               Get Quote
-            </motion.button>
+            </motion.a>
           </nav>
 
           {/* Mobile Menu Button */}

@@ -18,8 +18,7 @@ const Hero = () => {
             className="text-center lg:text-left"
           >
             <div className="inline-flex items-center bg-primary-100 rounded-full px-4 py-1.5 mb-6">
-              <Sparkles className="w-4 h-4 text-primary-600 mr-2" />
-              <span className="text-sm font-medium text-primary-700">Premium Cleaning Services</span>
+              <span className="text-sm font-medium text-primary-700">✨ Premium Cleaning Services</span>
             </div>
 
             <motion.h1
@@ -48,8 +47,9 @@ const Hero = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
             >
               {/* Enhanced Interactive Book Now Button */}
-              <motion.button
-                className="relative bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium overflow-hidden group"
+              <motion.a
+                href="mailto:Glowhauscleaning@gmail.com"
+                className="relative bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium overflow-hidden group inline-block"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
                 whileHover={{
@@ -120,11 +120,18 @@ const Hero = () => {
                     ease: "easeInOut"
                   }}
                 />
-              </motion.button>
+              </motion.a>
 
-              <button className="bg-white text-primary-600 border border-primary-500 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-all duration-200">
+              <a
+                href="#services"
+                className="inline-block bg-white text-primary-600 border border-primary-500 px-8 py-3 rounded-full font-medium hover:bg-primary-50 transition-all duration-200"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 Our Services
-              </button>
+              </a>
             </motion.div>
 
             <motion.div
@@ -171,8 +178,8 @@ const Hero = () => {
                 transition={{ delay: 1, duration: 0.5 }}
               >
                 <div className="flex items-center">
-                  <div className="bg-green-500 rounded-full w-3 h-3 mr-2"></div>
-                  <span className="text-sm font-medium">Available Today</span>
+                  {/* <div className="bg-green-500 rounded-full w-3 h-3 mr-2"></div> */}
+                  <span className="text-sm font-medium">🟢 Available Today</span>
                 </div>
               </motion.div>
 
@@ -183,7 +190,8 @@ const Hero = () => {
                 transition={{ delay: 1.2, duration: 0.5 }}
               >
                 <div className="flex items-center">
-                  <div className="text-amber-500 font-bold mr-1">★★★★★</div>
+                  {/* <div className="text-amber-500 font-bold mr-1">★★★★★</div> */}
+                  <div className="text-amber-500 font-bold mr-1">⭐️⭐️⭐️⭐️⭐️</div>
                   <span className="text-sm font-medium">Trusted Service</span>
                 </div>
               </motion.div>

@@ -13,10 +13,15 @@ Leads in one place. From Facebook, Instagram, Google, etc.
 
 Lead generation for wedding photography / cleaning business
 
+Add services
 Services
+
 Domestic Household Cleaning
-﻿Office Cleaning
-﻿Post Construction Cleaning
-﻿End of Tenancy Cleaning
-﻿Holiday Lets/ Airbnb 
+Office Cleaning
+Post Construction Cleaning
+End of Tenancy Cleaning
+Holiday Lets/ Airbnb 
 Post Event cleaning 
+
+
+Add logos

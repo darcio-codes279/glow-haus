@@ -1,9 +1,14 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'
+import { Inter, Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
 import ClientLayout from './ClientLayout';
 
 const inter = Inter({ subsets: ['latin'] })
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ['latin'],
+  weight: ['700', '800', '900'],
+  variable: '--font-hanken-grotesk'
+})
 
 // Metadata with comprehensive favicon configuration
 export const metadata: Metadata = {
@@ -13,20 +18,20 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/images/glow-haus-logo.png',
+        url: '/images/logoIcon.png',
         sizes: '32x32',
         type: 'image/png',
       },
       {
-        url: '/images/glow-haus-logo.png',
+        url: '/images/logoIcon.png',
         sizes: '16x16',
         type: 'image/png',
       }
     ],
-    shortcut: '/images/glow-haus-logo.png',
+    shortcut: '/images/logoIcon.png',
     apple: [
       {
-        url: '/images/glow-haus-logo.png',
+        url: '/images/logoIcon.png',
         sizes: '180x180',
         type: 'image/png',
       }
@@ -34,7 +39,7 @@ export const metadata: Metadata = {
     other: [
       {
         rel: 'icon',
-        url: '/images/glow-haus-logo.png',
+        url: '/images/logoIcon.png',
       }
     ]
   },
@@ -50,7 +55,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} ${hankenGrotesk}`}>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

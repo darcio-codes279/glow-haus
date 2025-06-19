@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react'
+// Removed Lucide React imports: Phone, Mail, MapPin, Clock, Send, CheckCircle
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -42,44 +42,37 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: Phone,
+      emoji: '📞', // Replaced Phone icon with emoji
       title: 'Phone',
-      content: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      content: '+44 7766 932674',
+      link: 'tel:+447766932674'
     },
     {
-      icon: Mail,
+      emoji: '📧', // Replaced Mail icon with emoji
       title: 'Email',
-      content: 'hello@glowhaus.com',
-      link: 'mailto:hello@glowhaus.com'
+      content: 'glowhauscleaning@gmail.com',
+      link: 'mailto:glowhauscleaning@gmail.com'
     },
     {
-      icon: MapPin,
-      title: 'Service Area',
-      content: 'Greater Metropolitan Area',
-      link: '#'
-    },
-    {
-      icon: Clock,
+      emoji: '🕒', // Replaced Clock icon with emoji
       title: 'Hours',
-      content: 'Mon-Fri: 8AM-6PM\nSat: 9AM-4PM',
+      content: '24/7 • 7 days a week',
       link: '#'
     }
   ]
 
   const services = [
-    'Residential Cleaning',
-    'Commercial Cleaning',
-    'Deep Cleaning',
-    'Move-in/Move-out',
-    'Post-Construction',
-    'Window Cleaning',
-    'Carpet Cleaning',
+    'Domestic Household Cleaning',
+    'Office Cleaning',
+    'Post Construction Cleaning',
+    'End of Tenancy Cleaning',
+    'Holiday Lets/ Airbnb',
+    'Post Event cleaning',
     'Other'
   ]
 
   return (
-    <section id="contact" className="py-16 md:py-24 bg-gray-50">
+    <section id="contact" className="py-16 md:py-24 bg-gray-50 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -117,7 +110,8 @@ const Contact = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-8"
               >
-                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                {/* Replaced CheckCircle icon with emoji */}
+                <span className="text-6xl block mb-4">✅</span>
                 <h4 className="text-xl font-semibold text-green-600 mb-2">Message Sent!</h4>
                 <p className="text-gray-600">Thank you for contacting us. We'll get back to you within 24 hours.</p>
               </motion.div>
@@ -210,7 +204,8 @@ const Contact = () => {
                   type="submit"
                   className="w-full bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200 flex items-center justify-center glow-effect"
                 >
-                  <Send className="w-5 h-5 mr-2" />
+                  {/* Replaced Send icon with emoji */}
+                  <span className="mr-2">📤</span>
                   Send Message
                 </button>
               </form>
@@ -226,7 +221,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
+              <h3 className="text-2xl font-bold mb-6 text-black">Get in Touch</h3>
               <p className="text-gray-600 mb-8">
                 We're here to help! Reach out to us through any of the following methods, and we'll respond promptly to discuss your cleaning needs.
               </p>
@@ -246,7 +241,8 @@ const Contact = () => {
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                      <info.icon className="w-6 h-6 text-primary-600" />
+                      {/* Replaced info.icon with info.emoji */}
+                      <span className="text-2xl">{info.emoji}</span>
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">{info.title}</h4>
@@ -269,9 +265,9 @@ const Contact = () => {
               <p className="text-primary-100 mb-4">
                 We offer 24/7 emergency cleaning services for urgent situations.
               </p>
-              <button className="bg-white text-primary-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+              <a href="tel:+447766932674" className="inline-block bg-white text-primary-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                 Call Emergency Line
-              </button>
+              </a>
             </motion.div>
           </motion.div>
         </div>

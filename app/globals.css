@@ -86,8 +86,24 @@ html {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #0ea5e9, #f59e0b);
+  background: linear-gradient(135deg, #0369a1, #0ea5e9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.outlined-text {
+  color: white;
+  -webkit-text-stroke: 0.01px #50ade6;
+  text-stroke: 0.01px #50ade6;
+  /* Fallback for browsers that don't support text-stroke */
+  text-shadow: 
+    -3px -3px 0 #50ade6,
+    3px -3px 0 #50ade6,
+    -3px 3px 0 #50ade6,
+    3px 3px 0 #50ade6,
+    -3px 0 0 #50ade6,
+    3px 0 0 #50ade6,
+    0 -3px 0 #50ade6,
+    0 3px 0 #50ade6;
 }

@@ -6,42 +6,42 @@ import { Star, Quote } from 'lucide-react'
 const Testimonials = () => {
   const testimonials = [
     {
-      name: 'Sarah Johnson',
+      name: 'Sarah',
       role: 'Homeowner',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-      content: 'Glow Haus transformed my home completely! Their attention to detail is incredible, and I love that they use eco-friendly products. My family feels safe and the house has never been cleaner.',
+      image: 'https://images.unsplash.com/photo-1701096351544-7de3c7fa0272?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      content: 'Absolutely Amazing!',
       rating: 5
     },
     {
-      name: 'Michael Chen',
+      name: 'Michael',
       role: 'Business Owner',
       image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-      content: 'We\'ve been using Glow Haus for our office cleaning for over two years. They\'re reliable, professional, and always exceed our expectations. Our employees love coming to a spotless workplace.',
+      content: 'The finish was absolutely brilliant',
       rating: 5
     },
     {
-      name: 'Emily Rodriguez',
+      name: 'Emily',
       role: 'Property Manager',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
-      content: 'Managing multiple properties, I need a cleaning service I can trust. Glow Haus delivers consistent quality across all our locations. Their team is professional and always on time.',
+      content: 'Experienced Touch. Their team is professional and always on time.',
       rating: 5
     },
     {
-      name: 'David Thompson',
+      name: 'David',
       role: 'Restaurant Owner',
       image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
       content: 'In the restaurant business, cleanliness is everything. Glow Haus helps us maintain the highest standards. Their deep cleaning service is thorough and helps us pass health inspections with flying colors.',
       rating: 5
     },
     {
-      name: 'Lisa Park',
+      name: 'Lisa',
       role: 'Working Mom',
       image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80',
       content: 'As a busy mom, Glow Haus is a lifesaver! They\'re flexible with scheduling and do an amazing job. I can finally spend weekends with my family instead of cleaning. Worth every penny!',
       rating: 5
     },
     {
-      name: 'Robert Wilson',
+      name: 'Robert',
       role: 'Retiree',
       image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
       content: 'I\'ve tried several cleaning services over the years, but none compare to Glow Haus. They treat my home with respect and care. The team is friendly, trustworthy, and incredibly thorough.',
@@ -165,9 +165,12 @@ const Testimonials = () => {
           <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
             Experience the Glow Haus difference and see why our customers keep coming back.
           </p>
-          <button className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect">
+          <a
+            href="mailto:Glowhauscleaning@gmail.com"
+            className="inline-block bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect"
+          >
             Book Your First Cleaning
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

@@ -13,11 +13,12 @@ const Footer = () => {
   ]
 
   const services = [
-    { name: 'Residential Cleaning', href: '#services' },
-    { name: 'Commercial Cleaning', href: '#services' },
-    { name: 'Deep Cleaning', href: '#services' },
-    { name: 'Move-in/Move-out', href: '#services' },
-    { name: 'Window Cleaning', href: '#services' }
+    { name: 'Domestic Household Cleaning', href: '#services' },
+    { name: 'Office Cleaning', href: '#services' },
+    { name: 'Post Construction Cleaning', href: '#services' },
+    { name: 'End of Tenancy Cleaning', href: '#services' },
+    { name: 'Holiday Lets/ Airbnb', href: '#services' },
+    { name: 'Post Event cleaning', href: '#services' }
   ]
 
   const socialLinks = [
@@ -28,8 +29,8 @@ const Footer = () => {
   ]
 
   const contactInfo = [
-    { icon: Phone, text: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { icon: Mail, text: 'hello@glowhaus.com', href: 'mailto:hello@glowhaus.com' },
+    { icon: Phone, text: '+44 7766 932674', href: 'tel:+447766932674' },
+    { icon: Mail, text: 'glowhauscleaning@gmail.com', href: 'mailto:glowhauscleaning@gmail.com' },
     { icon: MapPin, text: 'Greater Metropolitan Area', href: '#' }
   ]
 

@@ -41,7 +41,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
                 className="mb-8"
             >
                 <Image
-                    src="/images/glow-haus-logo.png"
+                    src="/images/logoIcon.png"
                     alt="Glow Haus Logo"
                     width={400}
                     height={400}
@@ -57,9 +57,8 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
                 transition={{ delay: 0.3, duration: 0.6 }}
                 className="text-center mb-8"
             >
-                <h1 className="text-4xl md:text-5xl font-bold bg-glowHausBlue bg-clip-text text-transparent mb-2">
-                    GLOW HAUS
-                </h1>
+                <span className="text-3xl text-[#1bc2ff] font-display font-black outlined-text tracking-wider">GLOW HAUS</span>
+
                 <p className="text-gray-600 text-lg font-medium">
                     Premium Cleaning Services
                 </p>
