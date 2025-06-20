@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-// Removed Lucide React imports: Phone, Mail, MapPin, Clock, Send, CheckCircle
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +9,10 @@ const Contact = () => {
     email: '',
     phone: '',
     service: '',
-    message: ''
+    squareFootage: '',
+    budget: '',
+    message: '',
+    pictures: [] as File[]
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -18,6 +20,14 @@ const Contact = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
+    })
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || [])
+    setFormData({
+      ...formData,
+      pictures: files
     })
   }
 
@@ -35,10 +45,14 @@ const Contact = () => {
         email: '',
         phone: '',
         service: '',
-        message: ''
+        squareFootage: '',
+        budget: '',
+        message: '',
+        pictures: []
       })
     }, 3000)
   }
+
 
   const contactInfo = [
     {
@@ -62,7 +76,8 @@ const Contact = () => {
   ]
 
   const services = [
-    'Domestic Household Cleaning',
+    'Domestic Household / University Accomodation Cleaning ',
+    'University Accommodations ',
     'Office Cleaning',
     'Post Construction Cleaning',
     'End of Tenancy Cleaning',
@@ -183,7 +198,44 @@ const Contact = () => {
                     </select>
                   </div>
                 </div>
-
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="squareFootage" className="block text-sm font-medium text-gray-700 mb-2">
+                      Square Footage
+                    </label>
+                    <input
+                      type="number"
+                      id="squareFootage"
+                      name="squareFootage"
+                      value={formData.squareFootage}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      placeholder="e.g. 1200"
+                      min="1"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
+                      Budget Range
+                    </label>
+                    <select
+                      id="budget"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                    >
+                      <option value="">Select budget range</option>
+                      <option value="Under £50">Under £50</option>
+                      <option value="£50 - £100">£50 - £100</option>
+                      <option value="£100 - £200">£100 - £200</option>
+                      <option value="£200 - £300">£200 - £300</option>
+                      <option value="£300 - £500">£300 - £500</option>
+                      <option value="Over £500">Over £500</option>
+                      <option value="Custom quote needed">Custom quote needed</option>
+                    </select>
+                  </div>
+                </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                     Message *
@@ -200,11 +252,44 @@ const Contact = () => {
                   ></textarea>
                 </div>
 
+                <div>
+                  <label htmlFor="pictures" className="block text-sm font-medium text-gray-700 mb-2">
+                    Upload Pictures (Optional)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="file"
+                      id="pictures"
+                      name="pictures"
+                      multiple
+                      accept="image/*"
+                      onChange={handleFileChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                    />
+                    <p className="text-sm text-gray-500 mt-2">
+                      📸 Upload photos of the area to be cleaned (Max 5 files, 10MB each)
+                    </p>
+                    {formData.pictures.length > 0 && (
+                      <div className="mt-2">
+                        <p className="text-sm text-green-600">
+                          ✅ {formData.pictures.length} file(s) selected
+                        </p>
+                        <ul className="text-xs text-gray-600 mt-1">
+                          {formData.pictures.map((file, index) => (
+                            <li key={index} className="truncate">
+                              • {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <button
                   type="submit"
                   className="w-full bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200 flex items-center justify-center glow-effect"
                 >
-                  {/* Replaced Send icon with emoji */}
                   <span className="mr-2">📤</span>
                   Send Message
                 </button>

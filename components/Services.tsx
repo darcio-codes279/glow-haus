@@ -5,7 +5,7 @@ const Services = () => {
   const services = [
     {
       emoji: '🏠',
-      title: 'Domestic Household Cleaning',
+      title: 'Domestic Household / University Accomodation Cleaning',
       description: 'Complete home cleaning services tailored to your needs',
       features: ['Deep cleaning', 'Regular maintenance', 'Move-in/out cleaning', 'Post-construction cleanup'],
       price: 'Custom quotes',
@@ -82,9 +82,6 @@ const Services = () => {
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             From residential homes to commercial spaces, we provide comprehensive cleaning services that exceed expectations.
-          </p>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-2">
-            Prices start from £17 per hour
           </p>
         </motion.div>
 
@@ -170,7 +167,7 @@ const Services = () => {
               <span className="text-sm">Eco-Friendly Products</span>
             </div>
           </div>
-          <a href="mailto:Glowhauscleaning@gmail.com?subject=Custom Quote Request" className="inline-block mt-6 bg-white text-primary-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors duration-200">
+          <a href="#contact" className="inline-block mt-6 bg-white text-primary-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors duration-200">
             Get Custom Quote
           </a>
         </motion.div>

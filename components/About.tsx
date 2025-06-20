@@ -56,7 +56,7 @@ const About = () => {
               viewport={{ once: true }}
             >
               <div className="text-center">
-                <div className="text-3xl font-bold text-primary-600">10+</div>
+                <div className="text-3xl font-bold text-primary-600">2+</div>
                 <div className="text-sm text-gray-600">Years Experience</div>
               </div>
             </motion.div>

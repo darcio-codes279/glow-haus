@@ -48,7 +48,7 @@ const Hero = () => {
             >
               {/* Enhanced Interactive Book Now Button */}
               <motion.a
-                href="mailto:Glowhauscleaning@gmail.com"
+                href="#contact"
                 className="relative bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium overflow-hidden group inline-block"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}

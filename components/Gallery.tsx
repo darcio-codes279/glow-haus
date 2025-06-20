@@ -185,9 +185,12 @@ const Gallery = () => {
           <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
             Join hundreds of satisfied customers who trust Glow Haus for their cleaning needs.
           </p>
-          <button className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect">
+          <a
+            href="#contact"
+            className="bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect inline-block"
+          >
             Schedule Your Cleaning
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

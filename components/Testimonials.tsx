@@ -139,7 +139,7 @@ const Testimonials = () => {
               <div className="text-primary-100">Happy Customers</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold mb-2">5000+</div>
+              <div className="text-3xl md:text-4xl font-bold mb-2">2000+</div>
               <div className="text-primary-100">Cleanings Completed</div>
             </div>
             <div>
@@ -166,7 +166,7 @@ const Testimonials = () => {
             Experience the Glow Haus difference and see why our customers keep coming back.
           </p>
           <a
-            href="mailto:Glowhauscleaning@gmail.com"
+            href="#contact"
             className="inline-block bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect"
           >
             Book Your First Cleaning

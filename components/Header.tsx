@@ -64,7 +64,7 @@ const Header = () => {
               </motion.a>
             ))}
             <motion.a
-              href="mailto:Glowhauscleaning@gmail.com?subject=Quote Request"
+              href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="inline-block bg-gradient-to-r from-primary-500 to-primary-700 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition-all duration-200 glow-effect"

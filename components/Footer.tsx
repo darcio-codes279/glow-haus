@@ -13,7 +13,7 @@ const Footer = () => {
   ]
 
   const services = [
-    { name: 'Domestic Household Cleaning', href: '#services' },
+    { name: 'Domestic Household / University Accomodation Cleaning', href: '#services' },
     { name: 'Office Cleaning', href: '#services' },
     { name: 'Post Construction Cleaning', href: '#services' },
     { name: 'End of Tenancy Cleaning', href: '#services' },
