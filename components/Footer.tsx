@@ -291,6 +291,22 @@ const Footer = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* Powered By */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="border-t border-gray-800 py-4"
+        >
+          <div className="text-center">
+            <p className="text-gray-500 text-xs">
+              Powered By Desejos Studio
+            </p>
+          </div>
+        </motion.div>
+
       </div>
     </footer>
   )
