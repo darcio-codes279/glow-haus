@@ -40,7 +40,7 @@ const Header = () => {
           >
             <div className="h-full flex items-center justify-center">
               <Image
-                src="/images/logoicon.png"
+                src="/images/logoIcon.png"
                 alt="Glow Haus Logo"
                 width={0}
                 height={0}
