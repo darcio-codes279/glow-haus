@@ -74,7 +74,7 @@ const About = () => {
             </div>
 
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">
-              Making Your Space <span className="gradient-text">Shine</span> Since 2014
+              Making Your Space <span className="gradient-text">Shine</span> Since 2023
             </h2>
 
             <p className="text-lg text-gray-600 mb-8">

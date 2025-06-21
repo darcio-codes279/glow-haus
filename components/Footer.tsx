@@ -2,8 +2,45 @@
 
 import { motion } from 'framer-motion'
 import { Phone, Mail, MapPin, Instagram, Star, } from 'lucide-react'
+import { useState } from 'react'
 
 const Footer = () => {
+  const [email, setEmail] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) return
+
+    setIsSubmitting(true)
+    setMessage('')
+
+    try {
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setMessage('Successfully subscribed!')
+        console.log(data.message)
+        setEmail('')
+      } else {
+        setMessage(data.error || 'Something went wrong')
+      }
+    } catch (error) {
+      setMessage('Failed to subscribe. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const quickLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
@@ -17,7 +54,7 @@ const Footer = () => {
     { name: 'Office Cleaning', href: '#services' },
     { name: 'Post Construction Cleaning', href: '#services' },
     { name: 'End of Tenancy Cleaning', href: '#services' },
-    { name: 'Holiday Lets/ Airbnb', href: '#services' },
+    { name: 'Holiday Lets / Airbnb', href: '#services' },
     { name: 'Post Event cleaning', href: '#services' }
   ]
 
@@ -28,7 +65,7 @@ const Footer = () => {
   const contactInfo = [
     { icon: Phone, text: '+44 7766 932674', href: 'tel:+447766932674' },
     { icon: Mail, text: 'glowhauscleaning@gmail.com', href: 'mailto:glowhauscleaning@gmail.com' },
-    { icon: MapPin, text: 'Greater Metropolitan Area', href: '#' }
+    { icon: MapPin, text: 'UK', href: '#' }
   ]
 
   return (
@@ -46,9 +83,6 @@ const Footer = () => {
               className="lg:col-span-1"
             >
               <div className="flex items-center mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-700 rounded-lg flex items-center justify-center mr-3">
-                  <Star className="w-6 h-6 text-white" />
-                </div>
                 <span className="text-2xl font-bold">Glow Haus</span>
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed">
@@ -144,17 +178,34 @@ const Footer = () => {
 
               {/* Newsletter Signup */}
               <div className="mb-8">
-                <div className="flex">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-white placeholder-gray-400"
-                  />
-                  <button className="bg-gradient-to-r from-primary-500 to-primary-700 px-6 py-2 rounded-r-lg hover:shadow-lg transition-all duration-200 font-medium">
-                    Subscribe
-                  </button>
-                </div>
+                <form onSubmit={handleNewsletterSubmit}>
+                  <div className="flex">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your email"
+                      required
+                      disabled={isSubmitting}
+                      className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50"
+                    />
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-gradient-to-r from-primary-500 to-primary-700 px-6 py-2 rounded-r-lg hover:shadow-lg transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                    </button>
+                  </div>
+                  {message && (
+                    <p className={`mt-2 text-sm ${message.includes('Successfully') ? 'text-green-400' : 'text-red-400'
+                      }`}>
+                      {message}
+                    </p>
+                  )}
+                </form>
               </div>
+
 
               {/* Social Links */}
               <div>
