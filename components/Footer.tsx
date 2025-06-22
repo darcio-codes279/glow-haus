@@ -1,8 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Phone, Mail, MapPin, Instagram, Star, } from 'lucide-react'
+import { Phone, Mail, MapPin, Instagram, Star } from 'lucide-react'
+import { TbBrandTiktok } from "react-icons/tb";
 import { useState } from 'react'
+
 
 const Footer = () => {
   const [email, setEmail] = useState('')
@@ -60,6 +62,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: Instagram, href: 'https://www.instagram.com/glowhauscleaning_/', label: 'Instagram' },
+    { icon: TbBrandTiktok, href: 'https://www.tiktok.com/@glowhauscleaning', label: 'TikTok' },
   ]
 
   const contactInfo = [
