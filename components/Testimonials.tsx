@@ -111,11 +111,11 @@ const Testimonials = () => {
 
               {/* Author */}
               <div className="flex items-center">
-                <img
+                {/* <img
                   src={testimonial.image}
                   alt={testimonial.name}
                   className="w-12 h-12 rounded-full object-cover mr-4"
-                />
+                /> */}
                 <div>
                   <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
                   <p className="text-sm text-gray-500">{testimonial.role}</p>
@@ -139,7 +139,7 @@ const Testimonials = () => {
               <div className="text-primary-100">Happy Customers</div>
             </div>
             <div>
-              <div className="text-3xl md:text-4xl font-bold mb-2">2000+</div>
+              <div className="text-3xl md:text-4xl font-bold mb-2">1000+</div>
               <div className="text-primary-100">Cleanings Completed</div>
             </div>
             <div>

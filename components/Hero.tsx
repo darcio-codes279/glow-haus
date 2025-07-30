@@ -145,7 +145,7 @@ const Hero = () => {
                 <div className="text-sm text-gray-500">Happy Clients</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary-600">5000+</div>
+                <div className="text-2xl font-bold text-primary-600">1000+</div>
                 <div className="text-sm text-gray-500">Cleanings</div>
               </div>
               <div className="text-center">

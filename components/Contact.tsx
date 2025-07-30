@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { event } from '@/lib/gtag'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -33,6 +34,14 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    event({
+      action: 'contact_form_submit',
+      category: 'lead_generation',
+      label: 'Contact Form',
+      value: 1
+    })
+
     // Here you would typically send the form data to your backend
     console.log('Form submitted:', formData)
     setIsSubmitted(true)
@@ -350,7 +359,13 @@ const Contact = () => {
               <p className="text-primary-100 mb-4">
                 We offer 24/7 emergency cleaning services for urgent situations.
               </p>
-              <a href="tel:+447766932674" className="inline-block bg-white text-primary-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+              <a href="tel:+447766932674"
+                onClick={() => event({
+                  action: 'email_click',
+                  category: 'contact',
+                  label: 'Email Address'
+                })}
+                className="inline-block bg-white text-primary-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                 Call Emergency Line
               </a>
             </motion.div>
