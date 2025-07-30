@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { event } from '@/lib/gtag'
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ const Contact = () => {
     pictures: [] as File[]
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -32,19 +34,72 @@ const Contact = () => {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setIsLoading(true)
 
-    event({
-      action: 'contact_form_submit',
-      category: 'lead_generation',
-      label: 'Contact Form',
-      value: 1
-    })
+    try {
+      let pictureUrls: string[] = []
 
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData)
-    setIsSubmitted(true)
+      // Upload pictures to Cloudinary if any
+      if (formData.pictures.length > 0) {
+        for (const file of formData.pictures) {
+          const uploadData = new FormData()
+          uploadData.append('file', file)
+          uploadData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!)
+          uploadData.append('folder', 'contact-form')
+
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+            {
+              method: 'POST',
+              body: uploadData
+            }
+          )
+
+          if (response.ok) {
+            const data = await response.json()
+            pictureUrls.push(data.secure_url)
+          }
+        }
+      }
+
+      // Send email with picture URLs
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          square_footage: formData.squareFootage,
+          budget: formData.budget,
+          message: formData.message,
+          picture_urls: pictureUrls.length > 0 ? pictureUrls.join('\n\n') : 'No pictures uploaded',
+          picture_count: pictureUrls.length.toString(),
+          to_email: 'glowhauscleaning@gmail.com'
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+
+      // Track successful submission
+      event({
+        action: 'contact_form_submit',
+        category: 'lead_generation',
+        label: 'Contact Form',
+        value: 1
+      })
+
+      setIsSubmitted(true)
+      console.log('Email sent successfully!')
+
+    } catch (error) {
+      console.error('Failed to send email:', error)
+      alert('Failed to send message. Please try again or call us directly at +44 7766 932674.')
+    } finally {
+      setIsLoading(false)
+    }
 
     // Reset form after 3 seconds
     setTimeout(() => {
@@ -62,22 +117,21 @@ const Contact = () => {
     }, 3000)
   }
 
-
   const contactInfo = [
     {
-      emoji: '📞', // Replaced Phone icon with emoji
+      emoji: '📞',
       title: 'Phone',
       content: '+44 7766 932674',
       link: 'tel:+447766932674'
     },
     {
-      emoji: '📧', // Replaced Mail icon with emoji
+      emoji: '📧',
       title: 'Email',
       content: 'glowhauscleaning@gmail.com',
       link: 'mailto:glowhauscleaning@gmail.com'
     },
     {
-      emoji: '🕒', // Replaced Clock icon with emoji
+      emoji: '🕒',
       title: 'Hours',
       content: '24/7 • 7 days a week',
       link: '#'
@@ -134,7 +188,6 @@ const Contact = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-8"
               >
-                {/* Replaced CheckCircle icon with emoji */}
                 <span className="text-6xl block mb-4">✅</span>
                 <h4 className="text-xl font-semibold text-green-600 mb-2">Message Sent!</h4>
                 <p className="text-gray-600">Thank you for contacting us. We'll get back to you within 24 hours.</p>
@@ -155,6 +208,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                       placeholder="Your full name"
+                      disabled={isLoading}
                     />
                   </div>
                   <div>
@@ -170,6 +224,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                       placeholder="your@email.com"
+                      disabled={isLoading}
                     />
                   </div>
                 </div>
@@ -187,6 +242,7 @@ const Contact = () => {
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                       placeholder="(555) 123-4567"
+                      disabled={isLoading}
                     />
                   </div>
                   <div>
@@ -199,6 +255,7 @@ const Contact = () => {
                       value={formData.service}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      disabled={isLoading}
                     >
                       <option value="">Select a service</option>
                       {services.map((service) => (
@@ -221,6 +278,7 @@ const Contact = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                       placeholder="e.g. 1200"
                       min="1"
+                      disabled={isLoading}
                     />
                   </div>
                   <div>
@@ -233,6 +291,7 @@ const Contact = () => {
                       value={formData.budget}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
+                      disabled={isLoading}
                     >
                       <option value="">Select budget range</option>
                       <option value="Under £50">Under £50</option>
@@ -258,6 +317,7 @@ const Contact = () => {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none"
                     placeholder="Tell us about your cleaning needs..."
+                    disabled={isLoading}
                   ></textarea>
                 </div>
 
@@ -274,6 +334,7 @@ const Contact = () => {
                       accept="image/*"
                       onChange={handleFileChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                      disabled={isLoading}
                     />
                     <p className="text-sm text-gray-500 mt-2">
                       📸 Upload photos of the area to be cleaned (Max 5 files, 10MB each)
@@ -297,10 +358,20 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200 flex items-center justify-center glow-effect"
+                  disabled={isLoading}
+                  className="w-full bg-gradient-to-r from-primary-500 to-primary-700 text-white px-8 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200 flex items-center justify-center glow-effect disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <span className="mr-2">📤</span>
-                  Send Message
+                  {isLoading ? (
+                    <>
+                      <span className="mr-2">⏳</span>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <span className="mr-2">📤</span>
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             )}
@@ -326,6 +397,21 @@ const Contact = () => {
                 <motion.a
                   key={info.title}
                   href={info.link}
+                  onClick={() => {
+                    if (info.title === 'Phone') {
+                      event({
+                        action: 'phone_click',
+                        category: 'contact',
+                        label: 'Phone Number'
+                      })
+                    } else if (info.title === 'Email') {
+                      event({
+                        action: 'email_click',
+                        category: 'contact',
+                        label: 'Email Address'
+                      })
+                    }
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -335,7 +421,6 @@ const Contact = () => {
                 >
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                      {/* Replaced info.icon with info.emoji */}
                       <span className="text-2xl">{info.emoji}</span>
                     </div>
                     <div>
@@ -359,13 +444,15 @@ const Contact = () => {
               <p className="text-primary-100 mb-4">
                 We offer 24/7 emergency cleaning services for urgent situations.
               </p>
-              <a href="tel:+447766932674"
+              <a
+                href="tel:+447766932674"
                 onClick={() => event({
-                  action: 'email_click',
+                  action: 'emergency_phone_click',
                   category: 'contact',
-                  label: 'Email Address'
+                  label: 'Emergency Phone'
                 })}
-                className="inline-block bg-white text-primary-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                className="inline-block bg-white text-primary-600 px-6 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              >
                 Call Emergency Line
               </a>
             </motion.div>
