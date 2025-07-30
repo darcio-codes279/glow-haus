@@ -40,6 +40,7 @@ const Contact = () => {
 
     try {
       let pictureUrls: string[] = []
+      let uploadErrors: string[] = []
 
       // Upload pictures to Cloudinary if any
       if (formData.pictures.length > 0) {
@@ -49,37 +50,54 @@ const Contact = () => {
           uploadData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!)
           uploadData.append('folder', 'contact-form')
 
-          const response = await fetch(
-            `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
-            {
-              method: 'POST',
-              body: uploadData
-            }
-          )
+          try {
+            const response = await fetch(
+              `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+              {
+                method: 'POST',
+                body: uploadData
+              }
+            )
 
-          if (response.ok) {
-            const data = await response.json()
-            pictureUrls.push(data.secure_url)
+            if (response.ok) {
+              const data = await response.json()
+              pictureUrls.push(data.secure_url)
+              console.log('Image uploaded successfully:', data.secure_url)
+            } else {
+              const errorText = await response.text()
+              console.error('Failed to upload image:', errorText)
+              uploadErrors.push(`Failed to upload ${file.name}`)
+            }
+          } catch (uploadError) {
+            console.error('Upload error for file:', file.name, uploadError)
+            uploadErrors.push(`Error uploading ${file.name}`)
           }
         }
       }
+
+      // Prepare email data with guaranteed values
+      const emailData = {
+        from_name: formData.name || 'Not provided',
+        from_email: formData.email || 'Not provided',
+        phone: formData.phone || 'Not provided',
+        service: formData.service || 'Not specified',
+        square_footage: formData.squareFootage || 'Not specified',
+        budget: formData.budget || 'Not specified',
+        message: formData.message || 'No message provided',
+        picture_urls: pictureUrls.length > 0 ? pictureUrls.join('\n\n') : 'No pictures uploaded',
+        picture_count: pictureUrls.length.toString(),
+        has_pictures: pictureUrls.length > 0 ? 'Yes' : 'No',
+        upload_errors: uploadErrors.length > 0 ? uploadErrors.join(', ') : 'None',
+        to_email: 'glowhauscleaning@gmail.com'
+      }
+
+      console.log('Sending email with data:', emailData)
 
       // Send email with picture URLs
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          phone: formData.phone,
-          service: formData.service,
-          square_footage: formData.squareFootage,
-          budget: formData.budget,
-          message: formData.message,
-          picture_urls: pictureUrls.length > 0 ? pictureUrls.join('\n\n') : 'No pictures uploaded',
-          picture_count: pictureUrls.length.toString(),
-          to_email: 'glowhauscleaning@gmail.com'
-        },
+        emailData,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
 
@@ -91,8 +109,23 @@ const Contact = () => {
         value: 1
       })
 
+      // Track picture uploads if any
+      if (pictureUrls.length > 0) {
+        event({
+          action: 'pictures_uploaded',
+          category: 'contact',
+          label: 'Contact Form Pictures',
+          value: pictureUrls.length
+        })
+      }
+
       setIsSubmitted(true)
       console.log('Email sent successfully!')
+
+      // Show upload errors if any (but still allow form submission)
+      if (uploadErrors.length > 0) {
+        console.warn('Some images failed to upload:', uploadErrors)
+      }
 
     } catch (error) {
       console.error('Failed to send email:', error)
@@ -114,6 +147,9 @@ const Contact = () => {
         message: '',
         pictures: []
       })
+      // Reset file input
+      const fileInput = document.getElementById('pictures') as HTMLInputElement
+      if (fileInput) fileInput.value = ''
     }, 3000)
   }
 
