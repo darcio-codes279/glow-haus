@@ -5,14 +5,14 @@ const CuratorFeed = () => {
         // Function to load the Curator.io script
         const loadCuratorScript = () => {
             // Check if script is already loaded to avoid duplicates
-            if (document.querySelector('script[src*="curator.io"]')) {
+            if (document.querySelector('script[src*="9849814d-64bb-4513-8b41-52e876adec67"]')) {
                 return;
             }
 
             const script = document.createElement('script');
             script.async = true;
             script.charset = 'UTF-8';
-            script.src = 'https://cdn.curator.io/published/6230977d-4378-4b29-83fa-bc593fc092e6.js';
+            script.src = 'https://cdn.curator.io/published/9849814d-64bb-4513-8b41-52e876adec67.js';
 
             // Insert script into document
             const firstScript = document.getElementsByTagName('script')[0];
@@ -25,7 +25,7 @@ const CuratorFeed = () => {
         // Cleanup function (optional)
         return () => {
             // Remove script when component unmounts if needed
-            const existingScript = document.querySelector('script[src*="6230977d-4378-4b29-83fa-bc593fc092e6"]');
+            const existingScript = document.querySelector('script[src*="9849814d-64bb-4513-8b41-52e876adec67"]');
             if (existingScript) {
                 existingScript.remove();
             }
